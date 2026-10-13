@@ -1,8 +1,6 @@
 package com.fiap.trying_spring.controller;
 import com.fiap.trying_spring.service.HelloWorldService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/")
@@ -16,5 +14,13 @@ public class HelloWorldController {
     @GetMapping
     public String hello (){
         return helloWorldService.helloWorld("Bebe");
+    }
+
+    @PostMapping("/{id}")
+    public String helloPost (
+            @PathVariable String id,
+            @RequestParam(value = "value", defaultValue = "nada") String value,
+            @RequestBody String body) {
+        return "Ola " + body + " " + id + " " + value;
     }
 }
